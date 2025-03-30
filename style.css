@@ -13,7 +13,7 @@ body {
     background-color: #fff;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     width: 85%;
     max-width: 600px;
     margin: 20px auto;
@@ -42,7 +42,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.link-type-buttons, .experimental-button {
+.link-type-toggle, .experimental-toggle {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -96,11 +96,6 @@ button:hover {
     transform: scale(1.05);
 }
 
-#indicator-text {
-    color: #1DB954;
-    font-weight: normal;
-    font-size: 0.9em;
-}
 
 #deeplink {
     margin-right: 10px;
@@ -119,47 +114,36 @@ button:hover {
     font-size: 14px;
 }
 
-/* Single Toggle Button Styling */
+/*  Simplified Button Toggle Styling  */
 .button-group {
     display: flex;
     gap: 10px;
 }
 
 .toggle-button {
-    background-color: #f8f9fa; /* Light gray default */
-    color: #495057; /* Dark gray text default */
-    border: 1px solid #ced4da; /* Light gray border */
-    border-radius: 6px;
+    border: none;
+    border-radius: 8px;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 0.95em;
     font-weight: 500;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-align: center;
 }
 
-.toggle-button:hover {
-    background-color: #e9ecef; /* Slightly darker gray on hover */
+/* Active States - VERY SIMPLE CSS */
+.toggle-button.active-green {
+    background-color: green; /* Solid Green */
+    color: white;
 }
 
-/* Increased Specificity for Active States */
-.link-type-buttons .toggle-button.active-green,
-.experimental-button .toggle-button.active-green {
-    background-color: #1DB954 !important; /* Spotify Green when active - !important to ensure override */
-    color: white !important;
-    border-color: #1DB954 !important;
+.toggle-button.active-red {
+    background-color: red;   /* Solid Red */
+    color: white;
 }
 
-.link-type-buttons .toggle-button.active-red,
-.experimental-button .toggle-button.active-red {
-    background-color: #dc3545 !important; /* Red for "Experimental: On" - !important to ensure override */
-    color: white !important;
-    border-color: #dc3545 !important;
-}
-
-
-.toggle-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+.toggle-button:not(.active-green):not(.active-red) { /* Default Inactive */
+    background-color: #f8f9fa; /* Light Gray */
+    color: #495057; /* Dark Gray Text */
 }
 
 
