@@ -20,16 +20,25 @@
             <input type="text" id="trackLink" name="trackLink" placeholder="Enter Track Link or URI from Playlist">
         </div>
 
-        <div class="form-group">
-           <label>Link Type:</label>
-           <div class="radio-group">
-                <input type="radio" id="uriLink" name="linkType" value="uri" checked>
-                <label for="uriLink">Spotify URI (App)</label>
+        <div class="options-row">
+            <div class="form-group link-type-toggle">
+                <label>Link Type:</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="linkTypeToggle" name="linkType" value="http">
+                    <label for="linkTypeToggle" class="toggle-label">
+                        <span class="toggle-inner"></span>
+                        <span class="toggle-switch-text">HTTP URL (Browser)</span>
+                        <span class="toggle-switch-text uri-text">Spotify URI (App)</span>
+                    </label>
+                </div>
+            </div>
 
-                <input type="radio" id="httpLink" name="linkType" value="http">
-                <label for="httpLink">HTTP URL (Browser)</label>
-           </div>
+            <div class="form-group experimental-toggle">
+                <label>Experimental:</label>
+                <input type="checkbox" id="experimentalToggle" name="experimental">
+            </div>
         </div>
+
 
         <button id="generateButton">Generate Track Deep Link</button>
 
@@ -40,20 +49,15 @@
         </div>
 
         <div id="error-message" class="error"></div>
-    </div>
 
-    <!-- Social Media Links (Below Container) -->
-    <div class="social-links">
-        <p>Follow Me:</p>
-        <a href="https://www.instagram.com/derpcat_music/" target="_blank">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIj48cGF0aCBkPSJNMTIgMCBDNi40NzcgMCAwIDYuNDc3IDAgMTJzNi40NzcgMTIgMTIgMTIgMTItNi40NzcgMTItMTJTMTcuNTIzIDAgMTIgMHptNS4wNjkgMTcuNjE1Yy0uMTY0LjM5MS0uNDg1LjcwOC0uODc1Ljg3NS0uNjYzLjI5LTEuNDEuNDY0LTIuMjYuNDY0cy0xLjU5Ny0uMTc0LTIuMjYtLjQ2NGMtLjM5LS4xNjctLjcwOS0uNDg0LS44NzUtLjg3NWwtLjExNy0uMjg4Yy0uMTY0LS4zOS0uNDg1LTcwOC0uODc1LS44NzUtLjY2My0uMjkxLTEuNDEtLjQ2NC0yLjI2LS40NjRzLTEuNTk3LjE3NC0yLjI2LjQ2NGMtLjM5LjE2Ny0uNzA5LjQ4NC0uODc1Ljg3NWwtLjExNy4yODhjLS4xNjQuMzkxLS40ODUuNzA4LS44NzUuODc1LS4yODkuMTItLjU5Ny4xOTMtLjkyLS4yMjMtLjMzLjAzLS42NTMuMDQ2LS45ODYuMDQ2cy0uNjYzLS4wMTYtLjk4Ni0uMDQ2Yy0uMzIzLS4wMy0uNjMxLS4xMDMtLjkyLS4yMjNWNi4zODVjLjE2NC0uMzkxLjQ4NS0uNzA4Ljg3NS0uODc1LjY2My0uMjkxIDEuNDEtLjQ2NCAyLjI2LS40NjRzMS41OTcuMTc0IDIuMjYuNDY0Yy4zOS4xNjcuNzA5LjQ4NC44NzUuODc1bC4xMTcuMjg4Yy4xNjQuMzkxLjQ4NS43MDguODc1Ljg3NS42NjMuMjkxIDEuNDEuNDY0IDIuMjYuNDY0czEuNTk3LS4xNzQgMi4yNi0uNDY0Yy4zOS0uMTY3LjcwOS0uNDg0Ljg3NS0uODc1bC4xMTctLjg4Yy4xNjQtLjM5MS40ODUtLjcwOC44NzUtLjg3NS4yODktLjEyLjU5Ny0uMTkzLjkyLS4yMjNjLjMyMy0uMDMtLjY1My0uMDQ2Ljk4Ni0uMDQ2cy42NjMuMDE2Ljk4Ni4wNDZjLjMyMy4wMy42MzEuMTAzLjkyLjIyM3YxMS4yMzFjLS4xNjQuMzkxLS40ODUuNzA4LS44NzUuODc1LS42NjMuMjkxLTEuNDEuNDY0LTIuMjYuNDY0cy0xLjU5Ny0uMTc0LTIuMjYtLjQ2NGMtLjM5LS4xNjctLjcwOS0uNDg0LS44NzUtLjg3NWwtLjExNy0uMjg4em03LjA2OS00LjYxNWMwIDIuNzYyLTI.MjM4IDUgNSAzLjk5NS0yLjIzOCAwLTQuMzA4LTIuMjM4LTQuMzA4LTUgMC0yLjc2MiAyLjIzOC01IDUtNSAyLjc2MiAwIDUgMi4yMzggNSA1em0wIDBjMCAyLjc2Mi0yLjIzOCA1LTUgNSAyLjc2MiAwIDUtMi4yMzggNS01IDAtMi43NjItMi4yMzgtNS01LTUtMi43NjIgMCA1IDIuMjM4IDUgNXptLTYuMzg1LTQuNjE1Yy0uNTUzIDAtMS0uNDQ3LTEtMXMxLS40NDcgMS0xLjQ0NyAxIDEgMSAxLjQ0NyAwIC41NTMtLjQ0NyAxLTEgMXoiLz48L3N2Zz4=" alt="Instagram" width="32" height="32">
-        </a>
-        <a href="https://www.youtube.com/@Derpcat" target="_blank">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIj48cGF0aCBkPSJNMjMuNDk1IDYuNDU1Yy0uMzI2LTEuMjY2LTEuMTk4LTIuMzI5LTIuMzItMi42NTVDMjAuMTYgMy4zNjMgMTIgMy4zNjMgMTIgMy4zNjNjMCAwLTguMTYgMC05LjE3Ni40MzctMS4xMjIuMzI2LTEuOTk0IDEuMzg5LTIuMzIgMi42NTVDLjUzNiA3LjcxNS4xIDkuNDQ3LjEgMTJzLjQzNiA0LjI4NS44NTkgNS41NDVDMS43NiAxOC43MzQgMi42MzIgMTkuNzk2IDMuNzU1IDIwLjEyMUM1LjA4IDIwLjU2MyAxMiAyMC41NjMgMTIgMjAuNTYzczYuOTIgMCA4LjI0NS0uNDM3YzEuMTIzLS4zMjYgMS45OTUtMS4zODkgMi4zMi0yLjY1NUMyMy40NjQgMTYuMjgzIDIzLjkgMTQuNTUxIDIzLjkgMTJzLS40MzYtNC4yODUtLjg1OS01LjU0NU05LjU0NyAxNS4zMzZWOC42NjlsNi4yNjYgMy4zMzMtNi4yNjYgMy4zMzNWMTUuMzM2eiIvPjwvc3ZnPg==" alt="YouTube" width="32" height="32">
-        </a>
-        <a href="https://open.spotify.com/artist/3o8xPY8Zencrdc3RtvVaQM?si=b657aff12885407e" target="_blank">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIj48cGF0aCBkPSJNMTEuOTk5IDI0QzUuMzc0IDI0IDAgMTguNjI3IDAgMTJzNS4zNzQtMTIgMTEuOTk5LTEyIDEyIDUuMzc0IDEyIDEyczUuMzc1IDEyIDExLjk5OSAxMnpNMjAuNzE0IDguNjY0YzAtLjY5Ni0uNTEyLTEuMjU4LTEuMTQ2LTEuMjU4LS42MzQgMC0xLjE0Ny41NjItMS4xNDcgMS4yNThzLjUxMiAxLjI1OCAxLjE0NyAxLjI1OGMuNjM0IDAgMS4xNDYtLjU2MiAxLjE0Ny0xLjI1OHptLTEyLjE5MSA2LjU0OWMuMDMzLjQwNC4xNjEuNzk1LjM5MSAxLjA4MyAxLjk4NSAyLjQxIDIuOTU0IDQuMjEzIDIuOTU0IDYuMzkxIDAgMS43OTUtLjk1NSAzLjU0Ny0yLjU0MyA0LjU0LS4yOTcuMTcxLS42NDEuMjY3LTEuMDE0LjI2Ny0uNDQ5IDAtLjg2Ni0uMTY4LTEuMTQ4LS40ODMtLjUxNS0uNTY1LS40ODQtMS41ODktLjQ4NC0yLjEyOCAwLS4yNDMuMDMyLS40NzUuMDg2LS42OTMuNjg2LTIuNTY1IDIuNjg3LTQuMjcgMi42ODctNi4yNjcgMC0xLjc3Ny0uOTcxLTMuNDc4LTIuNTQzLTQuNDY4LS4zLS4xNzMtLjY0Ny0uMjctMS4wMi0uMjc3LS40NDkgMC0uODU2LjE2My0xLjEzOC40NjItLjUyMS41NzgtLjQ4NS0xLjYyOC0uNDg1LTIuMTc2IDAtLjI0OC4wMzItLjQ3OC4wODYtLjcwMS41ODYtMi41NCAyLjU4NC00LjIxMyAyLjU4NC02LjIwOCAwLS42OTYtLjUxMi0xLjI1OC0xLjE0Ni0xLjI1OC0uNjM0IDAtMS4xNDYuNTYyLTEuMTQ2IDEuMjU4cy41MTIgMS4yNTggMS4xNDYgMS4yNThjLjA0OCAwIC4wOTMtLjAwNS4xMzctLjAxMi41MzQtMi4yNjYgMi4zMDgtMy44MDMgNC41NzEtMy44MDMgMi41NTggMCA0LjY1NCAxLjY4NCA1LjE5NCA0LjE5My4wMzUuMTYuMDYyLjMyOC4wNjIuNDkzdjkuMzQ1YzAgLjY5Ni41MTIgMS4yNTggMS4xNDcgMS4yNThzMS4xNDYtLjU2MiAxLjE0Ni0xLjI1OHYtOS4zNDVjMC0uMTY1LS4wMjctLjMyNy0uMDYyLS40OTMtLjUzNy0yLjUwOS0yLjYzNC00LjE5My01LjE5My00LjE5My0yLjI2MyAwLTQuMDM3IDEuNTM3LTQuNTcxIDMuODAzaC0uMDA0YzAtLjA0My0uMDA4LS4wODYtLjAxMy0uMTI5bTAgMGgtLjAwNHoiLz48L3N2Zz4=" alt="Spotify" width="32" height="32">
-        </a>
+        <!-- Social Media Buttons (Below Generated Link) -->
+        <div class="social-buttons">
+            <p>Follow Me:</p>
+            <a href="https://www.youtube.com/@Derpcat" class="youtube-button" target="_blank">YouTube</a>
+            <a href="https://www.instagram.com/derpcat_music/" class="instagram-button" target="_blank">Instagram</a>
+            <a href="https://open.spotify.com/artist/3o8xPY8Zencrdc3RtvVaQM?si=b657aff12885407e" class="spotify-button" target="_blank">Spotify</a>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
