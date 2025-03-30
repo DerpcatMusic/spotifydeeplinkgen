@@ -73,9 +73,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let deeplink = "";
         if (linkType === "uri") {
-            deeplink = `spotify:track:${trackId}`;
+            // Correct Deep Link format with context
+            deeplink = `spotify://track/${trackId}?context=spotify:playlist:${playlistId}`;
         } else {
-            deeplink = `https://open.spotify.com/track/${trackId}`;
+            // HTTP Link (can still include context, but less common)
+            deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}`;
         }
 
         deeplinkInput.value = deeplink;
