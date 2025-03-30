@@ -6,79 +6,55 @@ document.addEventListener("DOMContentLoaded", function() {
     const copyButton = document.getElementById("copyButton");
     const errorMessageDiv = document.getElementById("error-message");
 
-    function extractPlaylistId(playlistLink) {
-        // Try to extract playlist ID from various formats (URI or URL)
-        let playlistId = null;
-
-        // Spotify URI (spotify:playlist:...)
-        const uriRegex = /spotify:playlist:([a-zA-Z0-9]+)/;
-        const uriMatch = playlistLink.match(uriRegex);
-        if (uriMatch && uriMatch[1]) {
-            playlistId = uriMatch[1];
-        } else {
-            // Spotify URL (https:\/\/open\.spotify\.com\/playlist\/...)
-            const urlRegex = /https:\/\/open\.spotify\.com\/playlist\/([a-zA-Z0-9]+)/;
-            const urlMatch = playlistLink.match(urlRegex);
-            if (urlMatch && urlMatch[1]) {
-                playlistId = urlMatch[1];
-            }
+    function extractTrackIdFromUrl(trackUrl) {
+        // Step 1 & 2: Copy Track URL and Remove Everything After the Question Mark
+        let baseUrl = trackUrl.split('?')[0]; // Split at '?' and take the first part
+        const trackIdRegex = /track\/([a-zA-Z0-9]+)/;
+        const trackIdMatch = baseUrl.match(trackIdRegex);
+        if (trackIdMatch && trackIdMatch[1]) {
+            return trackIdMatch[1];
         }
-
-        return playlistId;
+        return null;
     }
 
-   function extractTrackId(trackLink) {
-        // Try to extract track ID from various formats (URI or URL)
-        let trackId = null;
-
-        // Spotify URI (spotify:track:...)
-        const uriRegex = /spotify:track:([a-zA-Z0-9]+)/;
-        const uriMatch = trackLink.match(uriRegex);
-        if (uriMatch && uriMatch[1]) {
-            trackId = uriMatch[1];
-        } else {
-            // Spotify URL (https:\/\/open\.spotify\.com\/track\/...)
-            const urlRegex = /https:\/\/open\.spotify\.com\/track\/([a-zA-Z0-9]+)/;
-            const urlMatch = trackLink.match(urlRegex);
-            if (urlMatch && urlMatch[1]) {
-                trackId = urlMatch[1];
-            }
+    function extractPlaylistIdFromUrl(playlistUrl) {
+        // Step 4: Copy Playlist URL and Extract the Playlist Code
+        const playlistIdRegex = /playlist\/([a-zA-Z0-9]+)/;
+        const playlistIdMatch = playlistUrl.match(playlistIdRegex);
+        if (playlistIdMatch && playlistIdMatch[1]) {
+            return playlistIdMatch[1];
         }
-
-        return trackId;
+        return null;
     }
 
     generateButton.addEventListener("click", function() {
-        const playlistLink = playlistLinkInput.value.trim();
-        const trackLink = trackLinkInput.value.trim();
+        const trackUrl = trackLinkInput.value.trim();
+        const playlistUrl = playlistLinkInput.value.trim();
 
-        const playlistId = extractPlaylistId(playlistLink);
-        const trackId = extractTrackId(trackLink);
+        const trackId = extractTrackIdFromUrl(trackUrl);
+        const playlistId = extractPlaylistIdFromUrl(playlistUrl);
 
-        if (!playlistId) {
-            errorMessageDiv.textContent = "Please enter a valid Playlist Link or URI.";
+        if (!trackId) {
+            errorMessageDiv.textContent = "Please enter a valid Track URL.";
             deeplinkInput.value = "";
             return;
         }
 
-        if (!trackId) {
-            errorMessageDiv.textContent = "Please enter a valid Track Link or URI.";
+        if (!playlistId) {
+            errorMessageDiv.textContent = "Please enter a valid Playlist URL.";
             deeplinkInput.value = "";
             return;
         }
 
         errorMessageDiv.textContent = ""; // Clear any previous errors
 
-        const linkType = document.querySelector('input[name="linkType"]:checked').value;
+        // Step 3: Add the Playlist Context
+        let deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:`;
 
-        let deeplink = "";
-        if (linkType === "uri") {
-            // Correct Deep Link format with context
-            deeplink = `spotify://track/${trackId}?context=spotify:playlist:${playlistId}`;
-        } else {
-            // HTTP Link (can still include context, but less common)
-            deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}`;
-        }
+        // Step 5: Combine the Track and Playlist Codes
+        deeplink += playlistId;
+
+        // Step 6:  No need to replace '?' with '&' in this case, as we only have one '?'
 
         deeplinkInput.value = deeplink;
     });
