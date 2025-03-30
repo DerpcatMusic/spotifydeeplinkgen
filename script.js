@@ -69,16 +69,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         errorMessageDiv.textContent = ""; // Clear any previous errors
 
-        // Construct the full deep link URI and HTTP for the track
-        const deeplinkURI = `spotify:track:${trackId}`;
-        const deeplinkHTTP = `https://open.spotify.com/track/${trackId}`;
+        const linkType = document.querySelector('input[name="linkType"]:checked').value;
 
-        //For opening inside the app
-        //deeplinkInput.value = deeplinkURI;
-        //For opening in browser
-        deeplinkInput.value = deeplinkHTTP;
+        let deeplink = "";
+        if (linkType === "uri") {
+            deeplink = `spotify:track:${trackId}`;
+        } else {
+            deeplink = `https://open.spotify.com/track/${trackId}`;
+        }
 
-
+        deeplinkInput.value = deeplink;
     });
 
     copyButton.addEventListener("click", function() {
