@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const playlistLink = playlistLinkInput.value.trim();
         const trackLink = trackLinkInput.value.trim();
 
-        const trackId = extractTrackIdFromUrl(trackLink);
         const playlistId = extractPlaylistIdFromUrl(playlistLink);
+        const trackId = extractTrackIdFromUrl(trackLink);
 
         if (!trackId) {
             errorMessageDiv.textContent = "Please enter a valid Track URL.";
@@ -59,13 +59,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let deeplink = "";
         if (linkType === "uri") {
-            // Spotify URI (App Link) - As before
+            // Spotify URI (App Link) - No Change
             const randomSi = generateRandomString(10);
             deeplink = `spotify://track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
         } else {
-            // HTTP URL (Browser Link) - GENERATE IN CORRECT FORMAT
+            // HTTP URL (Browser Link) - CHANGED TO http://
             const randomSi = generateRandomString(10);
-            deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
+            deeplink = `http://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`; // Note: http:// instead of https://
         }
 
         deeplinkInput.value = deeplink;
