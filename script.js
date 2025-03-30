@@ -7,10 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const errorMessageDiv = document.getElementById("error-message");
 
     function extractTrackIdFromUrl(trackUrl) {
-        // Step 1 & 2: Copy Track URL and Remove Everything After the Question Mark
-        let baseUrl = trackUrl.split('?')[0]; // Split at '?' and take the first part
         const trackIdRegex = /track\/([a-zA-Z0-9]+)/;
-        const trackIdMatch = baseUrl.match(trackIdRegex);
+        const trackIdMatch = trackUrl.match(trackIdRegex);
         if (trackIdMatch && trackIdMatch[1]) {
             return trackIdMatch[1];
         }
@@ -18,13 +16,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function extractPlaylistIdFromUrl(playlistUrl) {
-        // Step 4: Copy Playlist URL and Extract the Playlist Code
         const playlistIdRegex = /playlist\/([a-zA-Z0-9]+)/;
         const playlistIdMatch = playlistUrl.match(playlistIdRegex);
         if (playlistIdMatch && playlistIdMatch[1]) {
             return playlistIdMatch[1];
         }
         return null;
+    }
+
+    function generateRandomString(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
     }
 
     generateButton.addEventListener("click", function() {
@@ -48,13 +55,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         errorMessageDiv.textContent = ""; // Clear any previous errors
 
-        // Step 3: Add the Playlist Context
-        let deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:`;
+        const linkType = document.querySelector('input[name="linkType"]:checked').value; // Assuming radio buttons are still there
 
-        // Step 5: Combine the Track and Playlist Codes
-        deeplink += playlistId;
-
-        // Step 6:  No need to replace '?' with '&' in this case, as we only have one '?'
+        let deeplink = "";
+        if (linkType === "uri") {
+            // Correct Deep Link format: spotify://track/{trackId}?context=spotify:playlist:{playlistId}&si={randomString}
+            const randomSi = generateRandomString(10); // Generate a random 'si' string
+            deeplink = `spotify://track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
+        } else {
+            // HTTP Fallback (similar format for consistency, though 'si' might not be needed for HTTP)
+            deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}`;
+        }
 
         deeplinkInput.value = deeplink;
     });
