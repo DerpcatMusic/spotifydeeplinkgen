@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const deeplinkInput = document.getElementById("deeplink");
     const copyButton = document.getElementById("copyButton");
     const errorMessageDiv = document.getElementById("error-message");
+    const experimentalToggle = document.getElementById("experimentalToggle"); // Get experimental toggle
 
     function extractTrackIdFromUrl(trackUrl) {
         const trackIdRegex = /track\/([a-zA-Z0-9]+)/;
@@ -53,19 +54,27 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        errorMessageDiv.textContent = ""; // Clear any previous errors
+        errorMessageDiv.textContent = "";
 
-        const linkType = document.querySelector('input[name="linkType"]:checked').value;
+        const linkTypeToggle = document.getElementById("linkTypeToggle"); // Get the toggle element
+        const linkType = linkTypeToggle.checked ? "http" : "uri"; // Determine link type from toggle
+        const isExperimental = experimentalToggle.checked; // Check experimental toggle state
+
 
         let deeplink = "";
         if (linkType === "uri") {
             // Spotify URI (App Link) - No Change
             const randomSi = generateRandomString(10);
             deeplink = `spotify://track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
-        } else {
-            // HTTP URL (Browser Link) - CHANGED TO http://
+        } else { // HTTP URL
             const randomSi = generateRandomString(10);
-            deeplink = `http://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`; // Note: http:// instead of https://
+            if (isExperimental) {
+                // Experimental HTTP Logic (Previous HTTPS Logic)
+                deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
+            } else {
+                // Default HTTP Logic (Attempt 1 - http://)
+                deeplink = `http://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
+            }
         }
 
         deeplinkInput.value = deeplink;
@@ -73,14 +82,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     copyButton.addEventListener("click", function() {
         deeplinkInput.select();
-        deeplinkInput.setSelectionRange(0, 99999); /* For mobile devices */
+        deeplinkInput.setSelectionRange(0, 99999);
 
         try {
             document.execCommand('copy');
-            //Optional:  Notify user that the copy went ok
-            //alert("Copied the link: " + deeplinkInput.value);
         } catch (err) {
-            errorMessageDiv.textContent = "Failed to copy deep link.  Please copy manually.";
+            errorMessageDiv.textContent = "Failed to copy deep link. Please copy manually.";
         }
     });
 });
