@@ -21,30 +21,22 @@
         </div>
 
         <div class="options-row">
-            <div class="form-group link-type-toggle">
+            <div class="form-group link-type-buttons">
                 <label>Link Type:</label>
-                <div class="toggle-switch">
-                    <input type="checkbox" id="linkTypeToggle" name="linkType" value="http">
-                    <label for="linkTypeToggle" class="toggle-label">
-                        <span class="toggle-inner"></span>
-                        <span class="toggle-switch-text http-text">HTTP URL (Browser)</span>
-                        <span class="toggle-switch-text uri-text">Spotify URI (App)</span>
-                    </label>
+                <div class="button-group">
+                    <button id="httpButton" class="toggle-button active">Browser (HTTP)</button>
+                    <button id="uriButton" class="toggle-button">URI (Spotify App)</button>
                 </div>
-                <p class="toggle-description"><b>Link Type:</b> Choose between a Spotify URI (opens directly in the app) or an HTTP URL (opens in a browser, may redirect to app).</p> <label>Link Type:</label>
+                <p class="toggle-description"><b>Link Type:</b> Choose between a Browser (HTTP) link or a Spotify URI (App) link.</p>
             </div>
 
-            <div class="form-group experimental-toggle">
+            <div class="form-group experimental-button">
                 <label>Experimental:</label>
-                <div class="toggle-switch">
-                    <input type="checkbox" id="experimentalToggle" name="experimental">
-                    <label for="experimentalToggle" class="toggle-label">
-                        <span class="toggle-inner"></span>
-                        <span class="toggle-switch-text experimental-on">On</span>
-                        <span class="toggle-switch-text experimental-off">Off</span>
-                    </label>
+                <div class="button-group">
+                    <button id="experimentalOffButton" class="toggle-button active">Off</button>
+                    <button id="experimentalOnButton" class="toggle-button">On</button>
                 </div>
-                <p class="toggle-description"><b>Experimental:</b> Toggles between different HTTP link generation logics. Leave Off for best compatibility.</p>
+                <p class="toggle-description"><b>Experimental:</b> Toggles between different HTTP link logics. Leave Off for best compatibility.</p>
             </div>
         </div>
 
