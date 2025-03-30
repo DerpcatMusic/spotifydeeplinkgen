@@ -47,6 +47,7 @@ h1 {
     flex-direction: column; /* Stack label and toggle vertically */
     align-items: flex-start; /* Align items to the start (left) */
     gap: 5px; /* Spacing between label and toggle */
+    width: 48%; /* Adjust width as needed so they are side by side */
 }
 
 
@@ -73,6 +74,11 @@ input[type="text"]:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
+.generate-section {
+    text-align: center; /* Center the button and indicator */
+    margin-bottom: 20px; /* Space below button section */
+}
+
 button {
     background-color: #1DB954;
     color: #fff;
@@ -90,6 +96,13 @@ button:hover {
     background-color: #168f41;
     transform: scale(1.05);
 }
+
+#indicator-text {
+    color: #1DB954; /* Green color for indicator text */
+    font-weight: normal; /* Keep it normal weight */
+    font-size: 0.9em;
+}
+
 
 #deeplink {
     margin-right: 10px;
@@ -227,11 +240,11 @@ button:hover {
     background-color: #1DB954; /* Spotify Green */
 }
 
-/* Toggle Descriptions */
+/* Toggle Descriptions - Placed Below Toggles */
 .toggle-description {
     font-size: 0.85em;
     color: #6c757d;
-    margin-top: 3px;
-    margin-bottom: 0;
-    text-align: center; /* Center description text */
+    margin-top: 3px; /* Space between toggle and description */
+    margin-bottom: 15px; /* Space below description */
+    text-align: left; /* Align description text to the left */
 }
