@@ -5,10 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const deeplinkInput = document.getElementById("deeplink");
     const copyButton = document.getElementById("copyButton");
     const errorMessageDiv = document.getElementById("error-message");
-    const experimentalOffButton = document.getElementById("experimentalOffButton"); // Get Experimental Off button
-    const experimentalOnButton = document.getElementById("experimentalOnButton");   // Get Experimental On button
-    const httpButton = document.getElementById("httpButton");          // Get HTTP Button
-    const uriButton = document.getElementById("uriButton");            // Get URI Button
+    const experimentalButton = document.getElementById("experimentalButton"); // Get Experimental button
+    const linkTypeButton = document.getElementById("linkTypeButton");       // Get Link Type button
     const indicatorTextSpan = document.getElementById("indicator-text");
 
     let isExperimentalOn = false; // Track experimental state (default: off)
@@ -106,35 +104,37 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Link Type Button Event Listeners
-    httpButton.addEventListener("click", function() {
-        isHttpLinkType = true;
-        httpButton.classList.add("active");
-        uriButton.classList.remove("active");
+    // Link Type Button Event Listener (Single Button Toggle)
+    linkTypeButton.addEventListener("click", function() {
+        isHttpLinkType = !isHttpLinkType; // Toggle Link Type state
+        if (isHttpLinkType) {
+            linkTypeButton.textContent = "Browser (HTTP)";
+            linkTypeButton.classList.add("active-green");
+            linkTypeButton.classList.remove("active-red"); // Remove red class if present
+        } else {
+            linkTypeButton.textContent = "URI (Spotify App)";
+            linkTypeButton.classList.add("active-red"); // Use red class for URI (can change color if needed)
+            linkTypeButton.classList.remove("active-green");
+        }
         updateIndicatorText(isHttpLinkType ? "http" : "uri", isExperimentalOn); // Update indicator text
     });
 
-    uriButton.addEventListener("click", function() {
-        isHttpLinkType = false;
-        uriButton.classList.add("active");
-        httpButton.classList.remove("active");
+
+    // Experimental Button Event Listener (Single Button Toggle)
+    experimentalButton.addEventListener("click", function() {
+        isExperimentalOn = !isExperimentalOn; // Toggle Experimental state
+        if (isExperimentalOn) {
+            experimentalButton.textContent = "On";
+            experimentalButton.classList.add("active-green"); // Use active-green for "On" state (you can change to red if desired)
+            experimentalButton.classList.remove("active-red");
+        } else {
+            experimentalButton.textContent = "Off";
+            experimentalButton.classList.add("active-red"); // Use active-red for "Off" state (you can change color)
+            experimentalButton.classList.remove("active-green");
+        }
         updateIndicatorText(isHttpLinkType ? "http" : "uri", isExperimentalOn); // Update indicator text
     });
 
-    // Experimental Button Event Listeners
-    experimentalOffButton.addEventListener("click", function() {
-        isExperimentalOn = false;
-        experimentalOffButton.classList.add("active");
-        experimentalOnButton.classList.remove("active");
-        updateIndicatorText(isHttpLinkType ? "http" : "uri", isExperimentalOn); // Update indicator text
-    });
-
-    experimentalOnButton.addEventListener("click", function() {
-        isExperimentalOn = true;
-        experimentalOnButton.classList.add("active");
-        experimentalOffButton.classList.remove("active");
-        updateIndicatorText(isHttpLinkType ? "http" : "uri", isExperimentalOn); // Update indicator text
-    });
 
     updateIndicatorText(isHttpLinkType ? "http" : "uri", isExperimentalOn); // Set initial indicator text
 });
