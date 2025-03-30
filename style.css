@@ -42,14 +42,13 @@ h1 {
     margin-bottom: 20px;
 }
 
-.link-type-toggle, .experimental-toggle {
+.link-type-buttons, .experimental-button {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
     width: 48%;
 }
-
 
 label {
     display: block;
@@ -120,54 +119,37 @@ button:hover {
     font-size: 14px;
 }
 
-/*  Simplified Toggle Switch Styling  */
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 28px; /* Reduced height */
+/* Button Toggle Styling */
+.button-group {
+    display: flex; /* Arrange buttons horizontally */
+    gap: 10px; /* Spacing between buttons */
 }
 
-.toggle-switch input[type="checkbox"] {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.toggle-label {
-    position: absolute;
+.toggle-button {
+    background-color: #f8f9fa; /* Light gray default */
+    color: #495057; /* Dark gray text default */
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 6px;
+    padding: 8px 16px;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 28px; /* Match reduced height */
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.toggle-label:before { /* Simplified Toggle Knob */
-    position: absolute;
-    content: "";
-    height: 20px; /* Reduced knob size */
-    width: 20px; /* Reduced knob size */
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+.toggle-button:hover {
+    background-color: #e9ecef; /* Slightly darker gray on hover */
 }
 
-.toggle-switch input:checked + .toggle-label {
-    background-color: #1DB954; /* Spotify Green when toggled */
+.toggle-button.active {
+    background-color: #1DB954; /* Spotify Green when active */
+    color: white;
+    border-color: #1DB954; /* Spotify Green border when active */
 }
 
-.toggle-switch input:checked + .toggle-label:before {
-    transform: translateX(32px); /* Adjust based on reduced size */
-}
-
-.toggle-switch-text { /* Hide Text Labels for Simpler Toggles */
-    display: none;
+.toggle-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus outline */
 }
 
 
