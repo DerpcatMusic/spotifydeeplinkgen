@@ -37,23 +37,23 @@ h1 {
 
 .options-row {
     display: flex;
-    justify-content: space-between; /* Space out toggle groups */
-    align-items: flex-start; /* Align items vertically at the start */
-    margin-bottom: 20px; /* Space below options row */
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
 }
 
 .link-type-toggle, .experimental-toggle {
-    display: flex; /* Arrange label and toggle horizontally */
-    flex-direction: column; /* Stack label and toggle vertically */
-    align-items: flex-start; /* Align items to the start (left) */
-    gap: 5px; /* Spacing between label and toggle */
-    width: 48%; /* Adjust width as needed so they are side by side */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 48%;
 }
 
 
 label {
     display: block;
-    margin-bottom: 8px; /* Reduced margin for toggle labels */
+    margin-bottom: 8px;
     font-weight: 500;
     color: #495057;
 }
@@ -75,8 +75,8 @@ input[type="text"]:focus {
 }
 
 .generate-section {
-    text-align: center; /* Center the button and indicator */
-    margin-bottom: 20px; /* Space below button section */
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 button {
@@ -98,11 +98,10 @@ button:hover {
 }
 
 #indicator-text {
-    color: #1DB954; /* Green color for indicator text */
-    font-weight: normal; /* Keep it normal weight */
+    color: #1DB954;
+    font-weight: normal;
     font-size: 0.9em;
 }
-
 
 #deeplink {
     margin-right: 10px;
@@ -121,12 +120,12 @@ button:hover {
     font-size: 14px;
 }
 
-/* Toggle Switch Styling (No Changes to Core Styling) */
+/*  Simplified Toggle Switch Styling  */
 .toggle-switch {
     position: relative;
     display: inline-block;
     width: 60px;
-    height: 34px;
+    height: 28px; /* Reduced height */
 }
 
 .toggle-switch input[type="checkbox"] {
@@ -144,20 +143,14 @@ button:hover {
     bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 34px;
-    overflow: hidden; /* Clip inner text */
-    padding-left: 40px; /* Space for text when unchecked */
-    padding-right: 5px; /* Space for text when checked */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Align text to the right initially */
+    border-radius: 28px; /* Match reduced height */
 }
 
-.toggle-label .toggle-inner {
+.toggle-label:before { /* Simplified Toggle Knob */
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 20px; /* Reduced knob size */
+    width: 20px; /* Reduced knob size */
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -167,39 +160,16 @@ button:hover {
 
 .toggle-switch input:checked + .toggle-label {
     background-color: #1DB954; /* Spotify Green when toggled */
-    padding-left: 5px; /* Space for text when checked */
-    padding-right: 40px; /* Space for text when unchecked */
-    justify-content: flex-start; /* Align text to the left when checked */
 }
 
-.toggle-switch input:checked + .toggle-label .toggle-inner {
-    transform: translateX(26px);
+.toggle-switch input:checked + .toggle-label:before {
+    transform: translateX(32px); /* Adjust based on reduced size */
 }
 
-.toggle-switch-text {
-    position: absolute;
-    width: auto; /* Adjust width as needed */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: white;
-    font-size: 0.9em;
-    font-weight: 500;
+.toggle-switch-text { /* Hide Text Labels for Simpler Toggles */
+    display: none;
 }
 
-.toggle-switch-text.uri-text {
-    left: 5px; /* Position URI text when unchecked */
-    opacity: 1;
-    transition: opacity 0.4s;
-}
-
-.toggle-switch input:checked + .toggle-label .toggle-switch-text.uri-text {
-    opacity: 0; /* Hide URI text when checked */
-}
-
-.toggle-switch input:checked + .toggle-label .toggle-switch-text:not(.uri-text) {
-    right: 5px; /* Position HTTP text when checked */
-}
 
 /* Social Buttons Styling (No Changes) */
 .social-buttons {
@@ -240,11 +210,11 @@ button:hover {
     background-color: #1DB954; /* Spotify Green */
 }
 
-/* Toggle Descriptions - Placed Below Toggles */
+/* Toggle Descriptions (No Changes) */
 .toggle-description {
     font-size: 0.85em;
     color: #6c757d;
-    margin-top: 3px; /* Space between toggle and description */
-    margin-bottom: 15px; /* Space below description */
-    text-align: left; /* Align description text to the left */
+    margin-top: 3px;
+    margin-bottom: 15px;
+    text-align: left;
 }
