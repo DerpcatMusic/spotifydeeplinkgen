@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Playlist Deep Link Generator</title>
+    <title>Spotify Playlist Track Deep Link Generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Spotify Playlist Deep Link Generator</h1>
+        <h1>Spotify Playlist Track Deep Link Generator</h1>
 
         <div class="form-group">
-            <label for="playlistId">Playlist ID:</label>
-            <input type="text" id="playlistId" name="playlistId" placeholder="Enter Playlist ID">
+            <label for="playlistLink">Playlist Link or URI:</label>
+            <input type="text" id="playlistLink" name="playlistLink" placeholder="Enter Playlist Link or URI">
         </div>
 
-        <button id="generateButton">Generate Deep Link</button>
+       <div class="form-group">
+            <label for="trackLink">Track Link or URI from Playlist:</label>
+            <input type="text" id="trackLink" name="trackLink" placeholder="Enter Track Link or URI from Playlist">
+        </div>
+
+        <button id="generateButton">Generate Track Deep Link</button>
 
         <div class="form-group">
-            <label for="deeplink">Deep Link:</label>
+            <label for="deeplink">Track Deep Link:</label>
             <input type="text" id="deeplink" readonly placeholder="Generated Deep Link">
             <button id="copyButton">Copy</button>
         </div>
