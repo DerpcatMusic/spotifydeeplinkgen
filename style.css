@@ -38,20 +38,21 @@ h1 {
 .options-row {
     display: flex;
     justify-content: space-between; /* Space out toggle groups */
-    align-items: center; /* Vertically align items */
+    align-items: flex-start; /* Align items vertically at the start */
     margin-bottom: 20px; /* Space below options row */
 }
 
 .link-type-toggle, .experimental-toggle {
     display: flex; /* Arrange label and toggle horizontally */
-    align-items: center; /* Vertically align label and toggle */
-    gap: 15px; /* Spacing between label and toggle */
+    flex-direction: column; /* Stack label and toggle vertically */
+    align-items: flex-start; /* Align items to the start (left) */
+    gap: 5px; /* Spacing between label and toggle */
 }
 
 
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 8px; /* Reduced margin for toggle labels */
     font-weight: 500;
     color: #495057;
 }
@@ -107,7 +108,7 @@ button:hover {
     font-size: 14px;
 }
 
-/* Toggle Switch Styling */
+/* Toggle Switch Styling (No Changes to Core Styling) */
 .toggle-switch {
     position: relative;
     display: inline-block;
@@ -187,8 +188,7 @@ button:hover {
     right: 5px; /* Position HTTP text when checked */
 }
 
-
-/* Social Buttons Styling */
+/* Social Buttons Styling (No Changes) */
 .social-buttons {
     text-align: center;
     margin-top: 20px;
@@ -225,4 +225,13 @@ button:hover {
 
 .spotify-button {
     background-color: #1DB954; /* Spotify Green */
+}
+
+/* Toggle Descriptions */
+.toggle-description {
+    font-size: 0.85em;
+    color: #6c757d;
+    margin-top: 3px;
+    margin-bottom: 0;
+    text-align: center; /* Center description text */
 }
