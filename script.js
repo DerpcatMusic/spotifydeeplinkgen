@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (uriMatch && uriMatch[1]) {
             playlistId = uriMatch[1];
         } else {
-            // Spotify URL (https://open.spotify.com/playlist/...)
+            // Spotify URL (https:\/\/open\.spotify\.com\/playlist\/...)
             const urlRegex = /https:\/\/open\.spotify\.com\/playlist\/([a-zA-Z0-9]+)/;
             const urlMatch = playlistLink.match(urlRegex);
             if (urlMatch && urlMatch[1]) {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (uriMatch && uriMatch[1]) {
             trackId = uriMatch[1];
         } else {
-            // Spotify URL (https://open.spotify.com/track/...)
+            // Spotify URL (https:\/\/open\.spotify\.com\/track\/...)
             const urlRegex = /https:\/\/open\.spotify\.com\/track\/([a-zA-Z0-9]+)/;
             const urlMatch = trackLink.match(urlRegex);
             if (urlMatch && urlMatch[1]) {
@@ -69,10 +69,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
         errorMessageDiv.textContent = ""; // Clear any previous errors
 
-        // Construct the deep link URI for the track
+        // Construct the full deep link URI and HTTP for the track
         const deeplinkURI = `spotify:track:${trackId}`;
+        const deeplinkHTTP = `https://open.spotify.com/track/${trackId}`;
 
-        deeplinkInput.value = deeplinkURI;
+        //For opening inside the app
+        //deeplinkInput.value = deeplinkURI;
+        //For opening in browser
+        deeplinkInput.value = deeplinkHTTP;
+
 
     });
 
