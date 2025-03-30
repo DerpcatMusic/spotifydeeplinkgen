@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Playlist Deep Link Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Spotify Playlist Deep Link Generator</h1>
+
+        <div class="form-group">
+            <label for="playlistId">Playlist ID:</label>
+            <input type="text" id="playlistId" name="playlistId" placeholder="Enter Playlist ID">
+        </div>
+
+        <button id="generateButton">Generate Deep Link</button>
+
+        <div class="form-group">
+            <label for="deeplink">Deep Link:</label>
+            <input type="text" id="deeplink" readonly placeholder="Generated Deep Link">
+            <button id="copyButton">Copy</button>
+        </div>
+
+        <div id="error-message" class="error"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
