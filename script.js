@@ -35,11 +35,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     generateButton.addEventListener("click", function() {
-        const trackUrl = trackLinkInput.value.trim();
-        const playlistUrl = playlistLinkInput.value.trim();
+        const playlistLink = playlistLinkInput.value.trim();
+        const trackLink = trackLinkInput.value.trim();
 
-        const trackId = extractTrackIdFromUrl(trackUrl);
-        const playlistId = extractPlaylistIdFromUrl(playlistUrl);
+        const trackId = extractTrackIdFromUrl(trackLink);
+        const playlistId = extractPlaylistIdFromUrl(playlistLink);
 
         if (!trackId) {
             errorMessageDiv.textContent = "Please enter a valid Track URL.";
@@ -55,16 +55,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         errorMessageDiv.textContent = ""; // Clear any previous errors
 
-        const linkType = document.querySelector('input[name="linkType"]:checked').value; // Assuming radio buttons are still there
+        const linkType = document.querySelector('input[name="linkType"]:checked').value;
 
         let deeplink = "";
         if (linkType === "uri") {
-            // Correct Deep Link format: spotify://track/{trackId}?context=spotify:playlist:{playlistId}&si={randomString}
-            const randomSi = generateRandomString(10); // Generate a random 'si' string
+            // Spotify URI (App Link) - As before
+            const randomSi = generateRandomString(10);
             deeplink = `spotify://track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
         } else {
-            // HTTP Fallback (similar format for consistency, though 'si' might not be needed for HTTP)
-            deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}`;
+            // HTTP URL (Browser Link) - GENERATE IN CORRECT FORMAT
+            const randomSi = generateRandomString(10);
+            deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
         }
 
         deeplinkInput.value = deeplink;
