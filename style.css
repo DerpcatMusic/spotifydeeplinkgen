@@ -1,8 +1,8 @@
 body {
-    font-family: sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;  /* Reset body margin */
-    padding: 0; /* Reset body padding */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    background-color: #f8f9fa; /* Light gray background */
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,52 +11,68 @@ body {
 
 .container {
     background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    padding: 40px;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    width: 85%;
     max-width: 600px;
-    margin: 20px auto; /* Center the container horizontally and add vertical spacing */
+    margin: 20px auto;
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); /* Deeper shadow on hover */
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #1DB954; /* Spotify Green */
+    margin-bottom: 30px;
+    color: #212529; /* Darker heading color */
+    font-weight: 600; /* Semi-bold */
 }
 
 .form-group {
-    margin-bottom: 15px;  /* Adjust spacing between form groups */
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-bottom: 8px;
+    font-weight: 500; /* Slightly lighter bold */
+    color: #495057;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Important: Keeps padding inside the element */
+    padding: 12px 16px;
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #80bdff; /* Highlight border on focus */
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add focus shadow */
 }
 
 button {
     background-color: #1DB954; /* Spotify Green */
     color: #fff;
-    padding: 12px 20px;
+    padding: 14px 24px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.2s;
-    margin-top: 10px; /* Add space above the button */
+    font-size: 17px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
 }
 
 button:hover {
     background-color: #168f41; /* Darker Green */
+    transform: scale(1.05); /* Slight scale-up on hover */
 }
 
 #deeplink {
@@ -66,11 +82,12 @@ button:hover {
 }
 
 #copyButton {
-  margin-left: 10px;
-  padding: 12px 15px;
+    margin-left: 10px;
+    padding: 12px 15px;
 }
 
 .error {
-    color: red;
+    color: #dc3545; /* Red error color */
     margin-top: 10px;
+    font-size: 14px;
 }
