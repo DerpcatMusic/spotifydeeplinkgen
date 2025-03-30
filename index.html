@@ -21,22 +21,16 @@
         </div>
 
         <div class="options-row">
-            <div class="form-group link-type-buttons">
+            <div class="form-group link-type-toggle">
                 <label>Link Type:</label>
-                <div class="button-group">
-                    <button id="httpButton" class="toggle-button active">Browser (HTTP)</button>
-                    <button id="uriButton" class="toggle-button">URI (Spotify App)</button>
-                </div>
-                <p class="toggle-description"><b>Link Type:</b> Choose between a Browser (HTTP) link or a Spotify URI (App) link.</p>
+                <button id="linkTypeButton" class="single-toggle-button active-green">Browser (HTTP)</button>
+                <p class="toggle-description"><b>Link Type:</b> Click to switch between Browser (HTTP) link or Spotify URI (App) link.</p>
             </div>
 
-            <div class="form-group experimental-button">
+            <div class="form-group experimental-toggle">
                 <label>Experimental:</label>
-                <div class="button-group">
-                    <button id="experimentalOffButton" class="toggle-button active">Off</button>
-                    <button id="experimentalOnButton" class="toggle-button">On</button>
-                </div>
-                <p class="toggle-description"><b>Experimental:</b> Toggles between different HTTP link logics. Leave Off for best compatibility.</p>
+                <button id="experimentalButton" class="single-toggle-button active-green">Off</button>
+                <p class="toggle-description"><b>Experimental:</b> Click to toggle between different HTTP link logics. Leave Off for best compatibility.</p>
             </div>
         </div>
 
