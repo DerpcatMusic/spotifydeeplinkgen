@@ -135,6 +135,5 @@ document.addEventListener("DOMContentLoaded", function() {
         updateIndicatorText(isHttpLinkType ? "http" : "uri", isExperimentalOn); // Update indicator text
     });
 
-
     updateIndicatorText(isHttpLinkType ? "http" : "uri", isExperimentalOn); // Set initial indicator text
 });
