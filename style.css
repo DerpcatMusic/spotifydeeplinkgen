@@ -1,8 +1,8 @@
 body {
     font-family: sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    margin: 0;  /* Reset body margin */
+    padding: 0; /* Reset body padding */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,6 +16,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 600px;
+    margin: 20px auto; /* Center the container horizontally and add vertical spacing */
 }
 
 h1 {
@@ -25,7 +26,7 @@ h1 {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 15px;  /* Adjust spacing between form groups */
 }
 
 label {
@@ -51,7 +52,7 @@ button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.2s;
-    margin-top: 10px;
+    margin-top: 10px; /* Add space above the button */
 }
 
 button:hover {
