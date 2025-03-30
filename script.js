@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const deeplinkInput = document.getElementById("deeplink");
     const copyButton = document.getElementById("copyButton");
     const errorMessageDiv = document.getElementById("error-message");
-    const experimentalToggle = document.getElementById("experimentalToggle"); // Get experimental toggle
+    const experimentalToggle = document.getElementById("experimentalToggle");
+    const indicatorTextSpan = document.getElementById("indicator-text"); // Get the indicator span
 
     function extractTrackIdFromUrl(trackUrl) {
         const trackIdRegex = /track\/([a-zA-Z0-9]+)/;
@@ -56,28 +57,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
         errorMessageDiv.textContent = "";
 
-        const linkTypeToggle = document.getElementById("linkTypeToggle"); // Get the toggle element
-        const linkType = linkTypeToggle.checked ? "http" : "uri"; // Determine link type from toggle
-        const isExperimental = experimentalToggle.checked; // Check experimental toggle state
-
+        const linkTypeToggle = document.getElementById("linkTypeToggle");
+        const linkType = linkTypeToggle.checked ? "http" : "uri";
+        const isExperimental = experimentalToggle.checked;
 
         let deeplink = "";
+        let indicatorText = ""; // Text for indicator
+
         if (linkType === "uri") {
-            // Spotify URI (App Link) - No Change
             const randomSi = generateRandomString(10);
             deeplink = `spotify://track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
-        } else { // HTTP URL
+            indicatorText = "(Link Type: Spotify URI App)";
+        } else {
             const randomSi = generateRandomString(10);
             if (isExperimental) {
-                // Experimental HTTP Logic (Previous HTTPS Logic)
                 deeplink = `https://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
+                indicatorText = "(Link Type: HTTP Browser) (Experimental: On)";
             } else {
-                // Default HTTP Logic (Attempt 1 - http://)
                 deeplink = `http://open.spotify.com/track/${trackId}?context=spotify:playlist:${playlistId}&si=${randomSi}`;
+                indicatorText = "(Link Type: HTTP Browser) (Experimental: Off)";
             }
         }
 
         deeplinkInput.value = deeplink;
+        indicatorTextSpan.textContent = indicatorText; // Set the indicator text
     });
 
     copyButton.addEventListener("click", function() {
