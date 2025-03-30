@@ -91,3 +91,19 @@ button:hover {
     margin-top: 10px;
     font-size: 14px;
 }
+
+.social-links {
+    text-align: center;  /* Center the icons */
+    margin-bottom: 20px; /* Add space below the icons */
+}
+
+.social-links a {
+    display: inline-block; /* Allow horizontal spacing */
+    margin: 0 10px; /* Add space between icons */
+    opacity: 0.7; /* Make them slightly transparent */
+    transition: opacity 0.2s ease; /* Add hover effect */
+}
+
+.social-links a:hover {
+    opacity: 1; /* Make them fully opaque on hover */
+}
