@@ -1,35 +1,78 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const playlistIdInput = document.getElementById("playlistId");
+    const playlistLinkInput = document.getElementById("playlistLink");
+    const trackLinkInput = document.getElementById("trackLink");
     const generateButton = document.getElementById("generateButton");
     const deeplinkInput = document.getElementById("deeplink");
     const copyButton = document.getElementById("copyButton");
     const errorMessageDiv = document.getElementById("error-message");
 
+    function extractPlaylistId(playlistLink) {
+        // Try to extract playlist ID from various formats (URI or URL)
+        let playlistId = null;
+
+        // Spotify URI (spotify:playlist:...)
+        const uriRegex = /spotify:playlist:([a-zA-Z0-9]+)/;
+        const uriMatch = playlistLink.match(uriRegex);
+        if (uriMatch && uriMatch[1]) {
+            playlistId = uriMatch[1];
+        } else {
+            // Spotify URL (https://open.spotify.com/playlist/...)
+            const urlRegex = /https:\/\/open\.spotify\.com\/playlist\/([a-zA-Z0-9]+)/;
+            const urlMatch = playlistLink.match(urlRegex);
+            if (urlMatch && urlMatch[1]) {
+                playlistId = urlMatch[1];
+            }
+        }
+
+        return playlistId;
+    }
+
+   function extractTrackId(trackLink) {
+        // Try to extract track ID from various formats (URI or URL)
+        let trackId = null;
+
+        // Spotify URI (spotify:track:...)
+        const uriRegex = /spotify:track:([a-zA-Z0-9]+)/;
+        const uriMatch = trackLink.match(uriRegex);
+        if (uriMatch && uriMatch[1]) {
+            trackId = uriMatch[1];
+        } else {
+            // Spotify URL (https://open.spotify.com/track/...)
+            const urlRegex = /https:\/\/open\.spotify\.com\/track\/([a-zA-Z0-9]+)/;
+            const urlMatch = trackLink.match(urlRegex);
+            if (urlMatch && urlMatch[1]) {
+                trackId = urlMatch[1];
+            }
+        }
+
+        return trackId;
+    }
+
     generateButton.addEventListener("click", function() {
-        const playlistId = playlistIdInput.value.trim();
+        const playlistLink = playlistLinkInput.value.trim();
+        const trackLink = trackLinkInput.value.trim();
+
+        const playlistId = extractPlaylistId(playlistLink);
+        const trackId = extractTrackId(trackLink);
 
         if (!playlistId) {
-            errorMessageDiv.textContent = "Please enter a Playlist ID.";
+            errorMessageDiv.textContent = "Please enter a valid Playlist Link or URI.";
             deeplinkInput.value = "";
             return;
         }
 
-        // Basic Playlist ID Validation (Alphanumeric characters, minimum length)
-        if (!/^[a-zA-Z0-9]{10,}$/.test(playlistId)) {
-            errorMessageDiv.textContent = "Invalid Playlist ID format. Must be alphanumeric with at least 10 characters.";
+        if (!trackId) {
+            errorMessageDiv.textContent = "Please enter a valid Track Link or URI.";
             deeplinkInput.value = "";
             return;
         }
 
         errorMessageDiv.textContent = ""; // Clear any previous errors
 
-        const deeplinkURI = "spotify:playlist:" + playlistId;
-        const deeplinkHTTP = "https://open.spotify.com/playlist/" + playlistId;
+        // Construct the deep link URI for the track
+        const deeplinkURI = `spotify:track:${trackId}`;
 
-        deeplinkInput.value = deeplinkURI; // Use URI scheme by default
-
-        // Optional:  You could try to detect if Spotify is installed and use URI.
-        // Otherwise default to https://open.spotify...
+        deeplinkInput.value = deeplinkURI;
 
     });
 
