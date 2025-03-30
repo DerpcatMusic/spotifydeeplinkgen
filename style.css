@@ -92,11 +92,6 @@ button:hover {
     font-size: 14px;
 }
 
-.social-links {
-    text-align: center;  /* Center the icons */
-    margin-bottom: 20px; /* Add space below the icons */
-}
-
 /* Add this to your style.css */
 .social-links {
     text-align: center;  /* Center the icons */
