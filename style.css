@@ -1,6 +1,6 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,40 +12,54 @@ body {
 .container {
     background-color: #fff;
     padding: 40px;
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     width: 85%;
     max-width: 600px;
     margin: 20px auto;
-    transition: all 0.3s ease; /* Smooth transition */
+    transition: all 0.3s ease;
 }
 
 .container:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); /* Deeper shadow on hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #212529; /* Darker heading color */
-    font-weight: 600; /* Semi-bold */
+    color: #212529;
+    font-weight: 600;
 }
 
 .form-group {
     margin-bottom: 20px;
 }
 
+.options-row {
+    display: flex;
+    justify-content: space-between; /* Space out toggle groups */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 20px; /* Space below options row */
+}
+
+.link-type-toggle, .experimental-toggle {
+    display: flex; /* Arrange label and toggle horizontally */
+    align-items: center; /* Vertically align label and toggle */
+    gap: 15px; /* Spacing between label and toggle */
+}
+
+
 label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 500; /* Slightly lighter bold */
+    font-weight: 500;
     color: #495057;
 }
 
 input[type="text"] {
     width: 100%;
     padding: 12px 16px;
-    border: 1px solid #ced4da; /* Light gray border */
+    border: 1px solid #ced4da;
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 16px;
@@ -53,13 +67,13 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-    border-color: #80bdff; /* Highlight border on focus */
-    outline: none; /* Remove default focus outline */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add focus shadow */
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 button {
-    background-color: #1DB954; /* Spotify Green */
+    background-color: #1DB954;
     color: #fff;
     padding: 14px 24px;
     border: none;
@@ -67,12 +81,13 @@ button {
     cursor: pointer;
     font-size: 17px;
     font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #168f41; /* Darker Green */
-    transform: scale(1.05); /* Slight scale-up on hover */
+    background-color: #168f41;
+    transform: scale(1.05);
 }
 
 #deeplink {
@@ -87,66 +102,127 @@ button:hover {
 }
 
 .error {
-    color: #dc3545; /* Red error color */
+    color: #dc3545;
     margin-top: 10px;
     font-size: 14px;
 }
 
-/* Social Links Styling (No Changes) */
-.social-links {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-
-.social-links p {
-  margin-bottom: 5px;
-  font-weight: 500; /* Semi-bold label */
-  color: #495057;
-}
-
-.social-links a {
+/* Toggle Switch Styling */
+.toggle-switch {
+    position: relative;
     display: inline-block;
-    margin: 0 10px;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
+    width: 60px;
+    height: 34px;
 }
 
-.social-links a:hover {
-    opacity: 1;
+.toggle-switch input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-/* Radio Button Styling */
-.radio-group {
-    display: flex; /* Layout radio buttons horizontally */
-    gap: 20px; /* Space between radio button groups */
-    align-items: center; /* Align items vertically in the center */
-}
-
-.radio-group input[type="radio"] {
-    appearance: none; /* Remove default radio button styling */
-    -webkit-appearance: none; /* For Safari */
-    -moz-appearance: none; /* For Firefox */
-    width: 16px;
-    height: 16px;
-    border: 2px solid #ced4da;
-    border-radius: 50%;
-    outline: none;
+.toggle-label {
+    position: absolute;
     cursor: pointer;
-    transition: border-color 0.2s ease;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+    overflow: hidden; /* Clip inner text */
+    padding-left: 40px; /* Space for text when unchecked */
+    padding-right: 5px; /* Space for text when checked */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align text to the right initially */
 }
 
-.radio-group input[type="radio"]:checked {
-    border-color: #1DB954; /* Spotify Green when checked */
-    background-color: #1DB954;
-    padding: 2px; /* Create a dot inside */
-    border: 4px solid white; /* White border for the dot */
+.toggle-label .toggle-inner {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
 }
 
-.radio-group input[type="radio"]:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus outline */
+.toggle-switch input:checked + .toggle-label {
+    background-color: #1DB954; /* Spotify Green when toggled */
+    padding-left: 5px; /* Space for text when checked */
+    padding-right: 40px; /* Space for text when unchecked */
+    justify-content: flex-start; /* Align text to the left when checked */
 }
 
-.radio-group label {
-    margin-bottom: 0; /* Adjust label margin */
+.toggle-switch input:checked + .toggle-label .toggle-inner {
+    transform: translateX(26px);
+}
+
+.toggle-switch-text {
+    position: absolute;
+    width: auto; /* Adjust width as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.toggle-switch-text.uri-text {
+    left: 5px; /* Position URI text when unchecked */
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+
+.toggle-switch input:checked + .toggle-label .toggle-switch-text.uri-text {
+    opacity: 0; /* Hide URI text when checked */
+}
+
+.toggle-switch input:checked + .toggle-label .toggle-switch-text:not(.uri-text) {
+    right: 5px; /* Position HTTP text when checked */
+}
+
+
+/* Social Buttons Styling */
+.social-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-buttons p {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.social-buttons a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.social-buttons a:hover {
+    transform: scale(1.05);
+}
+
+.youtube-button {
+    background-color: #FF0000; /* YouTube Red */
+}
+
+.instagram-button {
+    background: linear-gradient(45deg, #f09433 0%, #e6687a 25%, #bc1888 50%, #8a3ab9 75%, #4c68d7 100%); /* Instagram Gradient */
+}
+
+.spotify-button {
+    background-color: #1DB954; /* Spotify Green */
 }
