@@ -97,6 +97,19 @@ button:hover {
     margin-bottom: 20px; /* Add space below the icons */
 }
 
+/* Add this to your style.css */
+.social-links {
+    text-align: center;  /* Center the icons */
+    margin-top: 30px; /* Add space above the icons */
+    margin-bottom: 20px; /* Add space below the icons */
+}
+
+.social-links p {
+  margin-bottom: 5px;
+  font-weight: 500; /* Semi-bold label */
+  color: #495057;
+}
+
 .social-links a {
     display: inline-block; /* Allow horizontal spacing */
     margin: 0 10px; /* Add space between icons */
