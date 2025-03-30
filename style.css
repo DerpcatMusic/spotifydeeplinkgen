@@ -92,11 +92,11 @@ button:hover {
     font-size: 14px;
 }
 
-/* Add this to your style.css */
+/* Social Links Styling (No Changes) */
 .social-links {
-    text-align: center;  /* Center the icons */
-    margin-top: 30px; /* Add space above the icons */
-    margin-bottom: 20px; /* Add space below the icons */
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .social-links p {
@@ -106,12 +106,47 @@ button:hover {
 }
 
 .social-links a {
-    display: inline-block; /* Allow horizontal spacing */
-    margin: 0 10px; /* Add space between icons */
-    opacity: 0.7; /* Make them slightly transparent */
-    transition: opacity 0.2s ease; /* Add hover effect */
+    display: inline-block;
+    margin: 0 10px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
 }
 
 .social-links a:hover {
-    opacity: 1; /* Make them fully opaque on hover */
+    opacity: 1;
+}
+
+/* Radio Button Styling */
+.radio-group {
+    display: flex; /* Layout radio buttons horizontally */
+    gap: 20px; /* Space between radio button groups */
+    align-items: center; /* Align items vertically in the center */
+}
+
+.radio-group input[type="radio"] {
+    appearance: none; /* Remove default radio button styling */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ced4da;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.radio-group input[type="radio"]:checked {
+    border-color: #1DB954; /* Spotify Green when checked */
+    background-color: #1DB954;
+    padding: 2px; /* Create a dot inside */
+    border: 4px solid white; /* White border for the dot */
+}
+
+.radio-group input[type="radio"]:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus outline */
+}
+
+.radio-group label {
+    margin-bottom: 0; /* Adjust label margin */
 }
