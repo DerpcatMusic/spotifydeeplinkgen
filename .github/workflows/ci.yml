@@ -14,8 +14,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
-    name: Safe checks
+  ci:
+    name: CI
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -31,15 +31,3 @@ jobs:
           package-manager-cache: false
       - name: Check JavaScript and local page resources
         run: python .github/check_static.py
-
-  ci:
-    name: CI
-    if: ${{ always() }}
-    needs: checks
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    steps:
-      - name: Require all checks
-        env:
-          CHECKS_RESULT: ${{ needs.checks.result }}
-        run: test "$CHECKS_RESULT" = success
